@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+ {{>headerlinks}}
+</head>
+<body>
+
+ {{>navbar}}
+
+   <div class="container" id="center">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-lg-12">
+
+        <form class="temp_form">
+            <input type="text" id="cityname" placeholder="Enter Your City Name" autocomplete="off" value="">
+            <input type="button" value="Search" id="submitBtn" onclick="weather()">
+        </form>    
+    </div>
+</div>
+    </div>
+      
+                <div class="container" id="cont">
+                  <div class="row" id="title">
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                    <p id="day" ></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-lg-6">
+                    <p id="today_date"></p>
+                    </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 col-sm-6 col-lg-6">
+      
+                          <p id="city_name">You will get the details</p>
+                          <p id="lat"></p>
+                          <p id="lon"></p>
+                          <p id="temp"><span>0</span><sup>o</sup>C</p>
+                          <p id="temp_max"></p> 
+                          <p id="temp_min"></p>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-lg-6">
+                      
+                     <p id="wind"></p>
+                      <p id="feels_like"></p>  
+                      <p id="pressure"></p>
+                      <p id="humidity"></p>
+                      <p id="pressure"></p>
+                      <p id="description"></p>
+                      <p id="visibility"></p>
+                    </div>
+                    </div>
+                    <div id="extra">
+                    </div>
+                </div>
+                        </div>
+ {{>footer}}
+
+ <script src="js/main.js"></script>
+</body>
+</html>

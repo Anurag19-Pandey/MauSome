@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    {{>headerlinks}}
+
+<style>
+    body{
+        background-color:black
+    }
+    p,h1{
+        color: #fff;
+    }
+</style>
+</head>
+<body>
+   
+  {{!-- {{>navbar}} --}}
+
+   <div class="container-fluid main_header">
+    <div class="row">
+        <div class="col-md-10 col-12 mx-auto">
+           <div class="row">
+            <div class="col-md-12 col-12 main_header_left">
+                <figure class="err">
+                    <img  src="images/error404.gif" style=" display: block; margin-left: auto; margin-right: auto; width: 100%;" class="img-fluid center" alt="">
+                </figure>
+                 <p>Welcome to SomeWhere which is NoWhere</p>
+                <h1>{{errorMsg}}</h1>
+                 <a href="/weather"><button>Back</button></a>
+               </div>
+             
+           </div>
+        </div>
+    </div>
+</div>
+
+  {{!-- {{>footer}} --}}
+</body>
+</html>
