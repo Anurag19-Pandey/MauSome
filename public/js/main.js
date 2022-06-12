@@ -53,7 +53,6 @@ const weather = ()=>{
   
     date.innerHTML =today.getDate()+'/'+(today.getMonth()+1)+'/'+today.getFullYear()
     cityval = document.getElementById("cityname").value
-    console.log(cityval)
     if(cityval == "")
     {
         console.log("Enter the name of the city to get the temperature")
@@ -62,7 +61,6 @@ const weather = ()=>{
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityval}&appid=67d3fd7861e99d574aef16ca9aa784ee`).then((apidata)=>{
             return apidata.json()
         }).then((data)=>{
-            console.log(data.weather[0].main)
             temp.innerHTML ="Temperature(in C) : "+Math.round(data.main.temp-273)
             cityname.innerHTML =`<i class="fa-solid fa-location-dot"></i>`+" City : "+ data.name
             wind.innerHTML =`<i class="fa-solid fa-wind"></i>`+" Wind Speed : "+data.wind.speed
