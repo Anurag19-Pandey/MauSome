@@ -15,7 +15,8 @@ var vis = document.getElementById("visibility")
 var desc = document.getElementById("description")
 var madesc = document.getElementById("extra")
 var today = new Date()
-
+var timezone
+var stat
 
 
 if(today.getDay() == 0)
@@ -55,7 +56,7 @@ const weather = ()=>{
     cityval = document.getElementById("cityname").value
     if(cityval == "")
     {
-        console.log("Enter the name of the city to get the temperature")
+        alert("Enter the name of the city to get the temperature")
     }    
     else{
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityval}&appid=67d3fd7861e99d574aef16ca9aa784ee`).then((apidata)=>{
@@ -73,28 +74,80 @@ const weather = ()=>{
             long.innerHTML = "Longitude : "+ data.coord.lon
             vis.innerHTML =`<i class="fa-solid fa-eye-slash"></i>`+" Visibility : "+data.visibility
             desc.innerHTML =  "Description : "+data.weather[0].description
-            if(data.weather[0].main == "Haze")
-            {
-                madesc.innerHTML = `<img src="../images/haze.png" style=" width: 300px;height: 150px;">`
-            }
-            else if(data.weather[0].main == "Clouds")
-            {
-                madesc.innerHTML = `<img src="../images/cloud.png" style=" width: 300px;height: 150px;">`
-            }
-            else if(data.weather[0].main == "Rain")
-            {
-                madesc.innerHTML = `<img src="../images/rain.png" style=" width: 300px;height: 150px;">`
-            }
-            else if(data.weather[0].main == "Dust")
-            {
-                madesc.innerHTML = `<img src="../images/dust.png" style=" width: 300px;height: 150px;">`
-            }
-            else
-            {
-                madesc.innerHTML = `<img src="../images/sun.png" style=" width: 300px;height: 150px;">`
-
-            }
+            stat = data.weather[0].main
+            telltime()
+             setTimeout(function(){
+               
+                 if(stat == "Haze")
+                 {
+                    if(timezone < 20 && timezone > 6)
+                    {
+                    madesc.innerHTML = `<img src="../images/haze.png" style=" width: 300px;height: 150px;">`
+                   }
+                   else
+                   {
+                    madesc.innerHTML = `<img src="../images/hazemoon.png" style=" width: 300px;height: 150px;">`
+                   }
+                }
+                else if(stat == "Clouds")
+                {
+                    madesc.innerHTML = `<img src="../images/cloud.png" style=" width: 300px;height: 150px;">`
+                }
+                else if(stat == "Rain")
+                {
+                    madesc.innerHTML = `<img src="../images/rain.png" style=" width: 300px;height: 150px;">`
+                }
+                else if(stat == "Dust")
+                {
+                    madesc.innerHTML = `<img src="../images/dust.png" style=" width: 300px;height: 150px;">`
+                }
+                else if(stat == "Thunderstorm")
+                {
+                    madesc.innerHTML = `<img src="../images/thunderstorm.png" style=" width: 300px;height: 150px;">`
+                }
+                else
+                {
+                    if(timezone < 20 && timezone > 6)
+                    {
+                    madesc.innerHTML = `<img src="../images/sun.png" style=" width: 300px;height: 150px;">`
+                    }
+                    else
+                    {
+                        madesc.innerHTML = `<img src="../images/clearmoon.png" style=" width: 300px;height: 150px;">`
+                    }
+                }  
+             },1000)
 
  })
 }
+}
+
+function telltime()
+{
+    cityval = document.getElementById("cityname").value
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '60a582b9c7msh6fa5fb6ae162491p137bccjsn0e735052d4a3',
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+        }
+    };
+  fetch(`https://weatherapi-com.p.rapidapi.com/timezone.json?q=${cityval}`, options).then((response )=> 
+        {
+         return response.json()
+    }).then((data) => {
+        let time = data.location.localtime
+        let result = time.substring(11)
+        if(result.length === 4)
+        {
+            timezone = result.substring(0,1)
+            return timezone
+        }
+        else
+        {
+            timezone = result.substring(0,2)
+            return timezone
+        }
+
+    }).catch(err => console.error(err));
 }
