@@ -105,6 +105,10 @@ const weather = ()=>{
                 {
                     madesc.innerHTML = `<img src="../images/thunderstorm.png" style=" width: 300px;height: 150px;">`
                 }
+                else if(stat == "Mist")
+                {
+                    madesc.innerHTML = `<img src="../images/mist.png" style=" width: 300px;height: 150px;">`
+                }
                 else
                 {
                     if(timezone < 20 && timezone > 6)
